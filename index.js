@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRouter = require("./Routes/userRouter");
 const portfolioRouter = require("./Routes/portfolioRouter");
+const TemplatesRouter = require("./Routes/TemplatesRouter");
 require("dotenv").config();
 
 main().catch((err) => console.log(err));
@@ -21,6 +22,7 @@ server.use(bodyParser.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(userRouter);
 server.use(portfolioRouter);
+server.use(TemplatesRouter);
 
 server.get("/", (req, res) => {
   res.send("Hello, world!");

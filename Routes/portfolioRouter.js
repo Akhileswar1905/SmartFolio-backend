@@ -15,4 +15,13 @@ const portfolioSchema = mongoose.Schema({
 
 const Folio = mongoose.model("Folio", portfolioSchema);
 
+portfolioRouter.get("/api/folios", async (req, res) => {
+  try {
+    const res = await Folio.find({});
+    res.status(200).json(res);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = portfolioRouter;
