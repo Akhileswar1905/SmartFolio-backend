@@ -78,10 +78,12 @@ userRouter.post("/api/users/login", async (req, res) => {
 userRouter.post("/api/users/register", async (req, res) => {
   try {
     const person = await User.find({ email: req.body.email });
-    if (person) {
+    console.log(person);
+    if (!person) {
       res.send("User Already Registered");
     } else {
       const user = await User.create(req.body);
+      console.log(user);
       res.status(200).json(user);
     }
   } catch (err) {
