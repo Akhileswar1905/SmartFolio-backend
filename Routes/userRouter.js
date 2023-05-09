@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -77,15 +78,9 @@ userRouter.post("/api/users/login", async (req, res) => {
 // Register
 userRouter.post("/api/users/register", async (req, res) => {
   try {
-    const person = await User.find({ email: req.body.email });
-    console.log(person);
-    if (!person) {
-      res.send("User Already Registered");
-    } else {
-      const user = await User.create(req.body);
-      console.log(user);
-      res.status(200).json(user);
-    }
+    const user = await User.create(req.body);
+    console.log(user);
+    res.status(200).json(user);
   } catch (err) {
     res.send(err);
   }
